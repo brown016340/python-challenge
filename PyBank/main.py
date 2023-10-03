@@ -1,8 +1,9 @@
 # import csv module
 import csv
+from pathlib import Path
 
 #set file path
-csvpath = "E:\Data analytics bootcamp\Challenges\module 3\Starter_Code\PyBank\Resources\\budget_data.csv"
+csvpath = Path(__file__).parent /"../Recources/budget_data.csv"
 
 #create empty list for profits
 total_profit = []

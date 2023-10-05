@@ -1,14 +1,14 @@
-# import csv module
+# Import csv module
 import csv
 from pathlib import Path
 
-#set file path
+# Set file path
 csvpath = Path(__file__) /"..\Recources\\budget_data.csv"
 
-#create empty list for profits
+# Create empty list for profits
 total_profit = []
 
-#create var for max&min change and date of change
+# Create var for max&min change and date of change
 max_value = 0
 prev_max_value = 0
 date_of_max_value = None
@@ -17,7 +17,7 @@ prev_min_value = 0
 date_of_min_value = None
 number = 0
 
-#empty list for months
+# Create empty list for months
 months = []
 
 # Open the CSV using the UTF-8 encoding
@@ -28,31 +28,31 @@ with open(csvpath,encoding='UTF-8') as csvfile:
     csv_header = next(csvreader)
 
     for row in csvreader:
-        #add profit/losses to total_profit list as integers 
+        # Add profit/losses to total_profit list as integers 
         total_profit.append(int(row[1]))
         months.append(row[0])
         
-        #find max&min values
+        # Find max&min values
         date = row[0]  
         number = (int(row[1])) - (int(prev_max_value))
-        #Check if this value is greater than the current maximum 
+        # Check if this value is greater than the current maximum 
         if number > max_value:
             max_value = number
             date_of_max_value = date
         prev_max_value = row[1]  
-        #Check if this value is less than the current minimum 
+        # Check if this value is less than the current minimum 
         if number < min_value:
             min_value = number
             date_of_min_value = date
         prev_min_value = row[1]
      
-    #find amount of months
+    # Find amount of months
     total_months= len(months)
 
-    #sum the total profits and store it in total
+    # Sum the total profits and store it in total
     total = sum(total_profit)
 
-    #find average change
+    # Find average change
     change = []
     for i in range(1, len(total_profit)):
         change.append(total_profit[i] - total_profit[i - 1])
@@ -61,7 +61,7 @@ with open(csvpath,encoding='UTF-8') as csvfile:
     average_change = round(float(average_change), decimal_places)
 
         
-#Print the analysis
+# Print the analysis
 print("Financial Analysis")
 print()
 print("----------------------------")
@@ -79,7 +79,7 @@ print(f"Greatest Decrease in Profits: {date_of_min_value} (${min_value})")
 
 output_file = Path(__file__) /"..\\analysis.txt"
 
-#Print the analysis to a txt file
+# Print the analysis to a txt file
 # Open the file in write mode
 with open(output_file, "w") as file:
     # Redirect the standard output (stdout) to the file
